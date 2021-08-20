@@ -52,11 +52,11 @@ INT_PTR CALLBACK AppDlgProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	case WM_HOTKEY:
 		switch (wparam) {
 		case HOTKEY_ID_HANGUL:
-			keybd_event(VK_HANGUL, 0xF2, KEYEVENTF_KEYUP, 0);
+			keybd_event(VK_HANGUL, 0xF2, KEYEVENTF_EXTENDEDKEY, 0);
 			return 0;
 
 		case HOTKEY_ID_HANJA:
-			keybd_event(VK_HANJA, 0xF1, KEYEVENTF_KEYUP, 0);
+			keybd_event(VK_HANJA, 0xF1, KEYEVENTF_EXTENDEDKEY, 0);
 			return 0;
 		}
 		break;
