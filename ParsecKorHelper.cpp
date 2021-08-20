@@ -11,11 +11,11 @@ constexpr int HOTKEY_ID_HANGUL = 1;
 constexpr int HOTKEY_ID_HANJA = 2;
 
 // 한글 키 조합
-constexpr UINT HOTKEY_HANGUL_MOD = MOD_CONTROL | MOD_ALT | MOD_NOREPEAT;
-constexpr UINT HOTKEY_HANGUL_VK = VK_SPACE;
+constexpr UINT HOTKEY_HANGUL_MOD = MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT;
+constexpr UINT HOTKEY_HANGUL_VK = VK_RETURN;
 // 한자 키 조합: 한글 입력 도중 ALT, WIN키 입력이 들어오면 IME가 조합을 완료시켜서 사용하지 못함
-constexpr UINT HOTKEY_HANJA_MOD = MOD_CONTROL | MOD_SHIFT;
-constexpr UINT HOTKEY_HANJA_VK = VK_RETURN;
+constexpr UINT HOTKEY_HANJA_MOD = MOD_CONTROL | MOD_SHIFT | MOD_NOREPEAT;
+constexpr UINT HOTKEY_HANJA_VK = 0xDC; // '\|' 키
 
 INT_PTR CALLBACK AppDlgProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	UNREFERENCED_PARAMETER(lparam);
@@ -36,6 +36,7 @@ INT_PTR CALLBACK AppDlgProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 					ss << desc << L" 이미 사용 중인 키조합";
 				else
 					ss << desc << L" Error: " << err;
+				MessageBox(hwnd, ss.str().c_str(), APP_TITLE, MB_OK | MB_ICONERROR);
 				return false;
 			}
 			return true;
